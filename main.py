@@ -14,15 +14,30 @@ def error(str):
     print(str)
     sys.exit(-1)
 
-def merge_terms(terms):
-    result = [0] * 3
-    for item in range(3):
-        result[item] = terms[0][item] - terms[1][item]
-    return result
-
-def reduce_form(terms):
+def print_reduce_form(terms):
     None
 
+def clear(tab):
+    while len(tab) > 0 and tab[len(tab) - 1] == 0:
+        tab = tab[:-1]
+    return tab
+
+def merge_terms(terms):
+    a = terms[0]
+    b = terms[1]
+    size = len(a) if len(a) > len(b) else len(b)
+    result = []
+    for index in range(size):
+        elem = 0.0
+        if len(a) > index:
+            elem = elem + a[index]
+        if len(b) > index:
+            elem = elem - b[index]
+        result.append(elem)
+    result = clear(result)
+    print(a, b, result)
+    return result
+    
 def discriminant(terms):
     # b^2 - 4 a c
     a = terms[2]
@@ -93,7 +108,7 @@ def main():
     equation = sys.argv[1]
     terms = list()
     for part in equation.replace(' ', '').split('='):
-        term = [0.0] * 3
+        term = []
         # rr = re.search('x(?:\^(\d+))?', part)
         rr = re.finditer('(\+|-|^)(?:(\d+(?:\.\d+)?)\*?)?(x(?:\^(\d+))?)?', part)
         # print(rr)
@@ -101,13 +116,19 @@ def main():
             match = item.groups()
             coef = float(match[0] + match[1] if match[1] else 1)
             index = (int(match[3]) if match[3] else 1) if match[2] else 0
-            term[index] = float(term[index]) + coef
+            if coef <> 0:
+                for n in range(len(term), index + 1):
+                    term.append(0.0)
+                print(term)
+                term[index] = float(term[index]) + coef
         terms.append(term)
 
     terms = merge_terms(terms)
-    if (terms[2]):
+    if len(terms) >= 4:
+        error("The polynomial degree is stricly greater than 2, I can't solve.")
+    elif len(terms) == 3:
         print(second_degree_soluce(terms))
-    elif(terms[1]):
+    elif len(terms) == 2:
         print(first_degree_soluce(terms))
     else:
         print("petit malin")
