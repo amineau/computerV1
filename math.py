@@ -14,21 +14,32 @@ def discriminant(monomials):
     result = b * b - 4 * a * c
     return result
 
-def pgcd(a,b) :  
-   while a%b != 0 : 
-      a, b = b, a%b 
+def pgcd(a,b) :
+   while a % b != 0:
+      a, b = b, a % b
    return b
 
 def abs(x):
     return x if x >= 0 else -x
 
 def sqrt(x):
-    last_guess = x/2.0
+
+    last_guess = x / 2.0
     while True:
-        guess = (last_guess + x/last_guess)/2
-        if abs(guess - last_guess) < .000001:
+        guess = (last_guess + x / last_guess) / 2
+        if abs(guess - last_guess) < 0.000001:
             return guess
         last_guess= guess
+
+def sqrt_facto(n):
+    # √a => b√c or sqrt(a)
+	root = sqrt(n)
+	if root.is_integer():
+		return (int(root))
+	root = int(root)
+	while n % (root * root):
+		root -= 1
+	return [root, int(n / (root * root))]
 
 def fraction(num, div):
     if num.is_integer() and div.is_integer():
@@ -47,13 +58,24 @@ def first_degree_solution(monomials):
     x = fraction(b*-1, a)
     return (x,)
 
+def factorisation(b, d, a):
+    root = sqrt_facto(d)
+    coef = 1
+    if type(root) == list:
+        coef = reduce(pgcd, (root[0], b, 2*a))
+        factor = str(root[0] / coef) if root[0] / coef <> 1 else ""
+        root = factor + u"√" + str(root[1])
+    num = convert_if_integer(b * -1 / coef)
+    div = convert_if_integer(2 * a / coef)
+    return (num, root, div)
+
 def second_degree_solution(monomials, discriminant):
     a = monomials[2]
     b = monomials[1]
     d = discriminant
     if d > 0:
         # x1 = -b - √d / 2a
-        # x2 = -b + √d / 2a    
+        # x2 = -b + √d / 2a
         x1 = fraction(- b - sqrt(d), 2 * a)
         x2 = fraction(- b + sqrt(d), 2 * a)
     elif d == 0:
@@ -62,8 +84,13 @@ def second_degree_solution(monomials, discriminant):
     else:
         # x1 = -b - i√-d / 2a
         # x2 = -b + i√-d / 2a
-        x1 = "(%s-i√%s)/%s"%(b*-1, d*-1, 2 * a)
-        x2 = "(%s+i√%s)/%s"%(b*-1, d*-1, 2 * a)
+        res = factorisation(b, -d, a)
+        if res[2] <> 1:
+            x1 = u"( %s - i * %s ) / %s"%(res[0], res[1], res[2])
+            x2 = u"( %s + i * %s ) / %s"%(res[0], res[1], res[2])
+        else:
+            x1 = u"%s - i * %s"%(res[0], res[1])
+            x2 = u"%s + i * %s"%(res[0], res[1])
     return (x, ) if d == 0 else (x1, x2)
 
 def zero_degree_solution(monomials):
