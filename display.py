@@ -14,21 +14,23 @@ def error(str):
     sys.exit(-1)
 
 def reduce_form(monomials):
-    tab = []
-    for index, elem in reversed(list(enumerate(monomials))):
-        if elem:
-            sign = '-' if elem < 0 else '+'
-            if len(tab) or sign == '-':
-                tab.append(sign)
-            if abs(elem) <> 1 or index == 0:
-                tab.append(str(convert_if_integer(abs(elem))))
-                if index:
-                    tab.append('*')
-            if index:
-                x = 'X'
-                x += '^%d'%(index) if index > 1 else ''
-                tab.append(x)
-    print("Reduced form: " + ' '.join(tab) + " = 0")
+	tab = []
+	for index, elem in reversed(list(enumerate(monomials))):
+		if elem:
+			sign = '-' if elem < 0 else '+'
+			if len(tab) or sign == '-':
+				tab.append(sign)
+			if abs(elem) <> 1 or index == 0:
+				tab.append(str(convert_if_integer(abs(elem))))
+				if index:
+					tab.append('*')
+			if index:
+				x = 'X'
+				x += '^%d'%(index) if index > 1 else ''
+				tab.append(x)
+	if len(tab) == 0:
+		tab = ['0']
+	print("Reduced form: " + ' '.join(tab) + " = 0")
 
 def polynomial_degree(degree):
     if degree >= 0:

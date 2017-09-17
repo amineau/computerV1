@@ -262,24 +262,23 @@ class TestComputerV1(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-# print("##### Function Tests #####")
-# print("##### polynomial greater than 2") # x^5 = 0
-# print("##### calcul same monomial") # x^1 + 3 * x^1 - 2 * x^1 = 0 => reduce form   2 * x^1 = 0
-# print("##### limb removal 1 ") # 0 = x^1 + 3 * x^2 - 2 = 0 => reduce form -3 * x^2 - x^1 + 2 = 0
-# print("##### limb removal 2 ") # x^1 -4 * x^2 + x^0 = x^1 + 3 * x^2 - 2 => reduce form -7 * x^2 + 3 = 0
-# print("##### solution 1 linear function")  # 2 * x^1 + 4 = 0 => x = -2
-# print("##### solution 2 linear function")  # 2 * x^1 - 8 * x^0 = 0 => x = 4
-# print("##### two solutions")  # -x^2 + 2 * x^1 + 3 = 0 => x1 = 3 et x2 = -1
-# print("##### one solution")  # 1 * x^2 + 2 * x^1 + 1 = 0 => -1
-# print("##### complex solution")  # 4 * x^2 + 2 * x^1 + 1 = 0 => x1 = (-2−i√12) / 8 et x2 = (-2+i√12) / 8
-# print("##### real solution")  # 4 * x^2 - 4 * x^2  = 0 => x: ℝ
-# print("##### no solution")  # 4 * x^0  = 0 => empty set
-# print("##### with float")  # 1.05 * x^2 + 2.5 * x^1 + 0.2 = 0 => x1 = -2.2980669856774 et x2 = -0.082885395274952
-# print("##### with zeros")  # 1 * x^2 + 0 * x^1 - 1 = 0 => x = 1
-# print("##### with zeros in greater polinomial")  # -x^2 + 2 * x^1 + 3 = 0 * X^5 => x1 = 3 et x2 = -1
+##### polynomial greater than 2 # x^5 = 0
+##### calcul same monomial # x^1 + 3 * x^1 - 2 * x^1 = 0 => reduce form   2 * x^1 = 0
+##### limb removal 1  # 0 = x^1 + 3 * x^2 - 2 = 0 => reduce form -3 * x^2 - x^1 + 2 = 0
+##### limb removal 2  # x^1 -4 * x^2 + x^0 = x^1 + 3 * x^2 - 2 => reduce form -7 * x^2 + 3 = 0
+##### solution 1 linear function  # 2 * x^1 + 4 = 0 => x = -2
+##### solution 2 linear function  # 2 * x^1 - 8 * x^0 = 0 => x = 4
+##### two solutions  # -x^2 + 2 * x^1 + 3 = 0 => x1 = 3 et x2 = -1
+##### one solution  # 1 * x^2 + 2 * x^1 + 1 = 0 => -1
+##### complex solution  # 4 * x^2 + 2 * x^1 + 1 = 0 => x1 = (-2−i√12) / 8 et x2 = (-2+i√12) / 8
+##### real solution  # 4 * x^2 - 4 * x^2  = 0 => x: ℝ
+##### no solution  # 4 * x^0  = 0 => empty set
+##### with float  # 1.05 * x^2 + 2.5 * x^1 + 0.2 = 0 => x1 = -2.2980669856774 et x2 = -0.082885395274952
+##### with zeros  # 1 * x^2 + 0 * x^1 - 1 = 0 => x = 1
+##### with zeros in greater polinomial  # -x^2 + 2 * x^1 + 3 = 0 * X^5 => x1 = 3 et x2 = -1
 
 
-# print("##### BONUS Tests #####")
-# print("##### fraction") # 4 * x^2 + 4 * x^1 + 4 * x^0 = 0 => x = -1/2
-# print("##### without '*' and '^'") # 4x^2 + 4x + 4 = 0 => x = -1/2
-# print("##### reduce form") # 4 * x^2 - 4 * x^1 = -4 * x^0 - 8 * x^1 =>  4x^2 + 4x +4
+##### BONUS Tests #####
+##### fraction # 4 * x^2 + 4 * x^1 + 4 * x^0 = 0 => x = -1/2
+##### without '*' and '^' # 4x^2 + 4x + 4 = 0 => x = -1/2
+##### reduce form # 4 * x^2 - 4 * x^1 = -4 * x^0 - 8 * x^1 =>  4x^2 + 4x +4
