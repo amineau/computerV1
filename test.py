@@ -47,10 +47,10 @@ class TestComputerV1(unittest.TestCase):
         tab = positive([-1.0, -2.0, 0.0])
         self.assertListEqual(tab, [1.0, 2.0, 0.0])
 
-    def test_merge_members(self):
+    def test_merge_monomials(self):
         tab1 = [0.0, 4.2, 3]
         tab2 = [1 , 2, 3, 4, 5]
-        result = merge_members([tab1, tab2])
+        result = merge_monomials([tab1, tab2])
         self.assertListEqual(result, [-1.0, 2.2, 0.0, -4.0, -5.0])
 
     def test_pgcd(self):
@@ -120,7 +120,7 @@ class TestComputerV1(unittest.TestCase):
     def test_equal_more(self):
         com = "Hello world = "
         output = self.cmd_output(com)
-        self.assertIn("At least one member is empty", output[0])
+        self.assertIn("At least one monomial is empty", output[0])
 
 
     def test_polynomial_greater(self):
@@ -129,7 +129,7 @@ class TestComputerV1(unittest.TestCase):
         self.assertIn("The polynomial degree is stricly greater than 2, I can't solve.", output[0])
         self.assertIn("Polynomial degree: 5", output[0])
 
-    def test_calcul_same_member(self):
+    def test_calcul_same_monomial(self):
         com = "X^1 + 3 * X^1 - 2 * X^1 = 0"
         output = self.cmd_output(com)
         self.assertIn("Polynomial degree: 1", output[0])
@@ -166,7 +166,7 @@ if __name__ == '__main__':
 # print("##### too many arguments")
 # print("##### '=' missing")
 # print("##### too many '='")
-# print("##### member empty")
+# print("##### monomial empty")
 # print("##### different unknown of x")
 # print("##### lexical 1")
 # print("##### lexical 2")
@@ -174,7 +174,7 @@ if __name__ == '__main__':
 
 # print("##### Function Tests #####")
 # print("##### polynomial greater than 2") # x^5 = 0
-# print("##### calcul same member") # x^1 + 3 * x^1 - 2 * x^1 = 0 => reduce form   2 * x^1 = 0
+# print("##### calcul same monomial") # x^1 + 3 * x^1 - 2 * x^1 = 0 => reduce form   2 * x^1 = 0
 # print("##### limb removal 1 ") # 0 = x^1 + 3 * x^2 - 2 = 0 => reduce form -3 * x^2 - x^1 + 2 = 0
 # print("##### limb removal 2 ") # x^1 -4 * x^2 + x^0 = x^1 + 3 * x^2 - 2 => reduce form -7 * x^2 + 3 = 0
 # print("##### solution test 1 linear function")  # 2 * x^1 + 4 = 0 => x = -2
