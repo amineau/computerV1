@@ -9,7 +9,9 @@
 import unittest
 import os
 import subprocess as cmd
+import monomial
 from main import *
+from math import *
 
 
 os.chdir(os.path.dirname(os.path.abspath(sys.argv[0])))
@@ -30,21 +32,21 @@ class TestComputerV1(unittest.TestCase):
         return output.decode("utf-8") , errput.decode("utf-8") 
 
     def test_clear(self):
-        tab = clear([1.0, 2, 0.0, 0.0])
+        tab = monomial.__clear__([1.0, 2, 0.0, 0.0])
         self.assertEqual(len(tab), 2)
-        tab = clear([1.0, 2, 0.0, 1.0])
+        tab = monomial.__clear__([1.0, 2, 0.0, 1.0])
         self.assertEqual(len(tab), 4)
 
     def test_positive(self):
-        tab = positive([1.0, -2.0, 0.0])
+        tab = monomial.__positive__([1.0, -2.0, 0.0])
         self.assertListEqual(tab, [1.0, -2.0, 0.0])
-        tab = positive([-1.0, -2.0, 0.0])
+        tab = monomial.__positive__([-1.0, -2.0, 0.0])
         self.assertListEqual(tab, [1.0, 2.0, 0.0])
 
     def test_merge_monomials(self):
         tab1 = [0.0, 4.2, 3]
         tab2 = [1 , 2, 3, 4, 5]
-        result = merge_monomials([tab1, tab2])
+        result = monomial.__merge__([tab1, tab2])
         self.assertListEqual(result, [-1.0, 2.2, 0.0, -4.0, -5.0])
 
     def test_pgcd(self):
