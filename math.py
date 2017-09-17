@@ -62,9 +62,12 @@ def factorisation(b, d, a):
     root = sqrt_facto(d)
     coef = 1
     if type(root) == list:
-        coef = reduce(pgcd, (root[0], b, 2*a))
+        coef = reduce(pgcd, (root[0], b, 2*a) if b else (root[0], 2*a))
         factor = str(root[0] / coef) if root[0] / coef <> 1 else ""
         root = factor + u"√" + str(root[1])
+    else:
+        coef = reduce(pgcd, (root, b, 2*a) if b else (root, 2*a))
+        root = convert_if_integer(abs(root / coef))
     num = convert_if_integer(b * -1 / coef)
     div = convert_if_integer(2 * a / coef)
     return (num, root, div)
@@ -85,12 +88,17 @@ def second_degree_solution(monomials, discriminant):
         # x1 = -b - i√-d / 2a
         # x2 = -b + i√-d / 2a
         res = factorisation(b, -d, a)
-        if res[2] <> 1:
-            x1 = u"( %s - i * %s ) / %s"%(res[0], res[1], res[2])
-            x2 = u"( %s + i * %s ) / %s"%(res[0], res[1], res[2])
+        x1 = u" * %s"%(res[1]) if res[1] <> 1 else "" 
+        x2 = u" * %s"%(res[1]) if res[1] <> 1 else "" 
+        if res[0]:
+            x1 = u"%s - i%s"%(res[0], x1)
+            x2 = u"%s + i%s"%(res[0], x2)
         else:
-            x1 = u"%s - i * %s"%(res[0], res[1])
-            x2 = u"%s + i * %s"%(res[0], res[1])
+            x1 = u"-i%s"%(x1)
+            x2 = u"i%s"%(x2)
+        if res[2] <> 1:
+            x1 = u"( %s ) / %s"%(x1, res[2])
+            x2 = u"( %s ) / %s"%(x2, res[2])
     return (x, ) if d == 0 else (x1, x2)
 
 def zero_degree_solution(monomials):

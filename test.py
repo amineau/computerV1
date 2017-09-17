@@ -70,6 +70,7 @@ class TestComputerV1(unittest.TestCase):
         self.assertEqual(discriminant([2, 3, 1]), 1)
         self.assertEqual(discriminant([5, 0, 2]), -40)
         self.assertEqual(discriminant([-3, 2, 2]), 28)
+        self.assertEqual(discriminant([1, -1, 2]), -7)
 
     def test_abs(self):
         self.assertEqual(abs(8.9), 8.9)
@@ -232,6 +233,30 @@ class TestComputerV1(unittest.TestCase):
         com = "4 * X^2 - 4 * X^1 = -4 * X^0 - 8 * X^1"
         output = self.cmd_output(com)[0]
         self.assertIn("Reduced form: 4 * X^2 + 4 * X + 4 = 0", output)
+
+    def test_result(self):
+        com = "2x^2 - 1x - 2 = 0"
+        output = self.cmd_output(com)[0]
+        self.assertIn("x1: -0.7807764", output)
+        self.assertIn("x2: 1.2807764", output)
+        com = "-2x^2 -4x + 3 = 0"
+        output = self.cmd_output(com)[0]
+        self.assertIn("x1: 0.58113", output)
+        self.assertIn("x2: -2.58113", output)
+        com = "-5x^2 -x + 2 = 0"
+        output = self.cmd_output(com)[0]
+        self.assertIn("x1: 0.540312", output)
+        self.assertIn("x2: -0.740312", output)
+        com = "-2x^2 + 4x - 10 = 0"
+        output = self.cmd_output(com)[0]
+        self.assertIn("x1: 1 - i * 2", output)
+        self.assertIn("x2: 1 + i * 2", output)
+        com = "x^2 + 1 = 0"
+        output = self.cmd_output(com)[0]
+        self.assertIn("x1: -i", output)
+        self.assertIn("x2: i", output)
+
+
 
 
 if __name__ == '__main__':
